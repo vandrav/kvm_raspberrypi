@@ -331,7 +331,7 @@ The VM will get an IP address from the `default` libvirt network. You need to fi
 2.  Run this command (it may take a few tries):
 
     ```bash
-    sudo virsh domifaddr ubuntu-ssh-vm
+    sudo virsh domifaddr ubuntu-vm-01
     ```
 
 3.  You will see an output like this. You need the `ipv4` address:
@@ -366,11 +366,11 @@ You should be logged in immediately without a password, as it's using your SSH k
 You can manage this VM with the same `virsh` commands as any other:
 
   * **List all VMs:** `virsh list --all`
-  * **Start:** `virsh start ubuntu-ssh-vm`
-  * **Shut down:** `virsh shutdown ubuntu-ssh-vm`
-  * **Force-stop:** `virsh destroy ubuntu-ssh-vm`
-  * **Enable auto-start:** `virsh autostart ubuntu-ssh-vm`
-  * **Edit configuration:** `virsh edit ubuntu-ssh-vm`
+  * **Start:** `virsh start ubuntu-vm-01`
+  * **Shut down:** `virsh shutdown ubuntu-vm-01`
+  * **Force-stop:** `virsh destroy ubuntu-vm-01`
+  * **Enable auto-start:** `virsh autostart ubuntu-vm-01`
+  * **Edit configuration:** `virsh edit ubuntu-vm-01`
 
 <!-- end list -->
 ---
