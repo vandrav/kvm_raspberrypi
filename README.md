@@ -2,7 +2,7 @@
 
 ## Getting Your Raspberry Pi Ready for KVM
 
-###Hardware Requirements
+### Hardware Requirements
 
 To successfully run KVM on a Raspberry Pi, you’ll need specific hardware that supports virtualization. The Raspberry Pi 4 Model B is the recommended platform, with a minimum of 4GB RAM, though 8GB is preferred for running multiple virtual machines smoothly. Earlier models like the Pi 3 technically support virtualization but offer limited performance.
 
