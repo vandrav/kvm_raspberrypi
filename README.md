@@ -1,4 +1,4 @@
-#KVM on Raspberry PI
+# KVM on Raspberry PI
 
 ## Getting Your Raspberry Pi Ready for KVM
 
@@ -12,7 +12,7 @@ For optimal performance, use a Raspberry Pi 4 with:
 – Active cooling solution or heatsink
 – Class 10 microSD card (minimum 32GB) or USB 3.0 SSD for storage
 
-###Operating System Preparation
+### Operating System Preparation
 
 Before diving into KVM setup, you’ll need to prepare your Raspberry Pi’s operating system with the necessary components. Start by ensuring you’re running a 64-bit version of Raspberry Pi OS (I used Ubuntu server 22 LTS), as this is essential for KVM virtualization. Update your system by running ‘sudo apt update’ followed by ‘sudo apt upgrade’ to ensure all packages are current.
 
@@ -36,9 +36,9 @@ kvm-ok
 
 If everything is set up correctly, you should see: **INFO: /dev/kvm exists KVM acceleration can be used**.
 
-##Installing and Configuring KVM
+## Installing and Configuring KVM
 
-###Installing KVM Packages
+### Installing KVM Packages
 
 * To get started with KVM on your Raspberry Pi, you’ll need to install several essential packages. Open your terminal and first update your package lists by running:
 
@@ -80,7 +80,7 @@ virsh list –-all
 
 This command should execute without errors, showing an empty list of virtual machines.
 
-###Setting Up Network Bridge
+### Setting Up Network Bridge
 
 !If you don't already have a bridge setup.
 
@@ -109,7 +109,7 @@ sudo systemctl restart networking
 
 When creating new virtual machines, select ‘br0’ as the network interface. This allows your VMs to appear as separate devices on your local network, making it easier to access services running in your virtual machines. Remember to ensure your firewall rules accommodate the bridge interface if you have custom security configurations in place.
 
-###Configuring KVM Parameters 
+### Configuring KVM Parameters 
 
 Optimizing your KVM parameters is crucial for achieving the best performance on your Raspberry Pi. Start by adjusting the memory allocation – a good rule of thumb is to reserve at least 1GB for the host system and allocate the remaining RAM to your virtual machines.You can fine-tune these Raspberry Pi virtualization tricks through the KVM configuration file.
 
@@ -207,7 +207,7 @@ sudo cpufreq-set -g performance
 This setting will reset when you reboot. To make it permanent, you would need to create a **systemd** service or use another method to run this command on boot.
 
 
-###Create, start and configure KVM virtual machines from the console
+### Create, start and configure KVM virtual machines from the console
 
 This guide outlines the procedure for creating and managing a KVM (Kernel-based Virtual Machine) on a **Raspberry Pi 4** running **Ubuntu Server 22.04 LTS**, all from the command line.
 
