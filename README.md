@@ -207,7 +207,7 @@ sudo cpufreq-set -g performance
 This setting will reset when you reboot. To make it permanent, you would need to create a **systemd** service or use another method to run this command on boot.
 
 
-### Create, start and configure KVM virtual machines from the console
+# Create, start and configure KVM virtual machines from the console
 
 This guide outlines the procedure for creating and managing a KVM (Kernel-based Virtual Machine) on a **Raspberry Pi 4** running **Ubuntu Server 22.04 LTS**, all from the command line.
 
@@ -390,5 +390,3 @@ This will open the VM's XML file in your default editor (like `nano`).
 
 Save and exit the file. Most changes will only apply after you shut down and restart the VM.
 
-```
-```
