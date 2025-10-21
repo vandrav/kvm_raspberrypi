@@ -398,7 +398,83 @@ Use the `virsh` (Virtual Shell) to control your VMs.
 
 -----
 
-## Part 5: Optional Performance Tuning
+## Part 5: Cloning a Virtual Machine
+
+Once you have a base VM set up (especially from the ISO install method), the fastest way to create new VMs is to **clone** it. This copies the disk and configuration.
+
+### Step 1: Shut Down the Source VM
+
+To prevent data corruption, it's safest to shut down your original (source) VM before cloning it.
+
+```bash
+# Replace 'ubuntu-vm-01' with the name of the VM you want to clone
+sudo virsh shutdown ubuntu-vm-01
+
+# Wait a few seconds, then check that it is 'shut off'
+sudo virsh list --all
+```
+
+### Step 2: Clone the VM
+
+Use the `virt-clone` command to automatically copy the disk and create a new VM definition.
+
+  * `--original`: The name of the VM you want to copy.
+  * `--name`: The name for your new VM.
+  * `--file`: The full path for the **new** disk file.
+
+<!-- end list -->
+
+```bash
+sudo virt-clone \
+--original ubuntu-vm-01 \
+--name ubuntu-vm-02 \
+--file /var/lib/libvirt/images/ubuntu-vm-02.qcow2
+```
+
+This will show a progress bar as it copies the disk.
+
+### Step 3: Fix Identity Conflicts (Critical)
+
+Your new VM (`ubuntu-vm-02`) is an **exact** copy. This means it has the same hostname, machine-ID, and network settings. You **must** change this to avoid conflicts on your network.
+
+1.  **Start the new VM:**
+
+    ```bash
+    sudo virsh start ubuntu-vm-02
+    ```
+
+2.  **Connect to its console:**
+
+    ```bash
+    sudo virsh console ubuntu-vm-02
+    ```
+
+3.  **Log in:** Use the *same username and password* as your original VM.
+
+4.  **Change the hostname:**
+
+    ```bash
+    sudo hostnamectl set-hostname ubuntu-vm-02
+    ```
+
+5.  **Reset the machine-ID:** This is very important for services to work correctly.
+
+    ```bash
+    sudo rm /etc/machine-id
+    sudo systemd-machine-id-setup
+    ```
+
+6.  **Reboot the VM:**
+
+    ```bash
+    sudo reboot
+    ```
+
+After it reboots, `ubuntu-vm-02` is a fully independent machine. You can find its new, unique IP address using `sudo virsh net-dhcp-leases default` and SSH into it.
+
+-----
+
+## Part 6: Optional Performance Tuning
 
 ### 1\. Global QEMU Configuration
 
@@ -453,7 +529,7 @@ This resets on reboot. You must create a `systemd` service to make it permanent.
 
 -----
 
-## Part 6: Common Troubleshooting
+## Part 7: Common Troubleshooting
 
   * **Error: `cannot undefine domain with nvram`**
 
